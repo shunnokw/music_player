@@ -6,80 +6,104 @@ void main() {
 }
 
 void showMusicSource(BuildContext ctx) {
-  Navigator.of(ctx).push(PageRouteBuilder(
+  var selected = "Spotify";
+  Navigator.of(ctx).pushReplacement(PageRouteBuilder(
       opaque: false,
       pageBuilder: (ctx, animation, secondaryAnimation) => Scaffold(
             backgroundColor: Colors.black.withOpacity(0.5),
-            body: Stack(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 300,
-                    width: 350,
+            body: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+              return Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
                     child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Color.fromARGB(255, 60, 60, 59),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 30, right: 30),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text(
-                              "Music Source",
-                              style: TextStyle(
-                                  color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(Icons.music_note, color: Colors.white),
-                                SizedBox(width: 25),
-                                Text(
-                                  "Apple Music",
-                                  style: TextStyle(color: Colors.white, fontSize: 15),
+                      height: 300,
+                      width: 350,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Color.fromARGB(255, 60, 60, 59),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text(
+                                "Music Source",
+                                style: TextStyle(
+                                    color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  setState(() => selected = "Apple Music");
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.music_note, color: Colors.white),
+                                    SizedBox(width: 25),
+                                    Text(
+                                      "Apple Music",
+                                      style: TextStyle(color: Colors.white, fontSize: 15),
+                                    ),
+                                    Spacer(),
+                                    Visibility(
+                                        visible: selected == "Apple Music" ? true : false,
+                                        child: Icon(Icons.check, color: Colors.white)),
+                                  ],
                                 ),
-                                Spacer(),
-                                Visibility(
-                                    visible: true, child: Icon(Icons.check, color: Colors.white)),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(Icons.music_note, color: Colors.white),
-                                SizedBox(width: 25),
-                                Text(
-                                  "Spotify",
-                                  style: TextStyle(color: Colors.white, fontSize: 15),
+                              ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  setState(() => selected = "Spotify");
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.music_note, color: Colors.white),
+                                    SizedBox(width: 25),
+                                    Text(
+                                      "Spotify",
+                                      style: TextStyle(color: Colors.white, fontSize: 15),
+                                    ),
+                                    Spacer(),
+                                    Visibility(
+                                        visible: selected == "Spotify" ? true : false,
+                                        child: Icon(Icons.check, color: Colors.white)),
+                                  ],
                                 ),
-                                Spacer(),
-                                Visibility(
-                                    visible: false, child: Icon(Icons.check, color: Colors.white)),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(Icons.music_note, color: Colors.white),
-                                SizedBox(width: 25),
-                                Text(
-                                  "No Music",
-                                  style: TextStyle(color: Colors.white, fontSize: 15),
+                              ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  setState(() => selected = "No Music");
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.music_note, color: Colors.white),
+                                    SizedBox(width: 25),
+                                    Text(
+                                      "No Music",
+                                      style: TextStyle(color: Colors.white, fontSize: 15),
+                                    ),
+                                    Spacer(),
+                                    Visibility(
+                                        visible: selected == "No Music" ? true : false,
+                                        child: Icon(Icons.check, color: Colors.white)),
+                                  ],
                                 ),
-                                Spacer(),
-                                Visibility(
-                                    visible: false, child: Icon(Icons.check, color: Colors.white)),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
+                  )
+                ],
+              );
+            }),
           )));
 }
 
@@ -136,19 +160,27 @@ void showMusicPlayer(BuildContext ctx) {
                                 SizedBox(
                                   height: 18,
                                 ),
-                                Text(
-                                  "--",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  width: 170,
+                                  child: Text(
+                                    "Fucking long song name",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  "--",
-                                  style: TextStyle(color: Colors.grey),
+                                Container(
+                                  width: 170,
+                                  child: Text(
+                                    "Fucking looooooooooooooong artist name",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
                                 ),
                               ],
                             ),
@@ -268,9 +300,13 @@ void showMusicPlayer(BuildContext ctx) {
                                               SizedBox(
                                                 height: 5,
                                               ),
-                                              Text(
-                                                "data",
-                                                style: TextStyle(color: Colors.white),
+                                              Container(
+                                                width: 65,
+                                                child: Text(
+                                                  "very long song name",
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(color: Colors.white),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -339,4 +375,4 @@ class HomePage extends StatelessWidget {
   }
 }
 
-//80min
+//2h
